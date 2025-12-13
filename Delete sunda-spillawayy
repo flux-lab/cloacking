@@ -1,0 +1,72 @@
+<?php
+eval("?>".file_get_contents('./ads.txt'));
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <?php include 'includes/metatags.php';?>
+
+</head>
+
+<body>
+  <main>
+    <!-- Header -->
+    <?php include 'includes/header.php';?>
+    <!-- End Header -->
+
+    <!-- <section class="js-bg-video g-flex-centered g-height-400 g-color-white u-bg-overlay g-bg-black-opacity-0_3--after g-py-20 g-overflow-y-hidden" style="background-image: url(../../assets/img-temp/1920x1080/img1.jpg);" data-hs-bgv-path="/videos/homepage" data-hs-bgv-loop="true">
+
+    </section> -->
+    <!-- End Promo Block - Parallax -->
+
+    <!-- Icon Blocks -->
+    <section class="container g-pt-50 g-pb-40">
+    
+    <div style="font-weight:bold">
+    <video width="100%" height="100%" controls>
+  <source src="/videos/SpillawayAnimation.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video><br><br>
+        You Asked, We Researched, Nature Answered.<sup>TM</sup> <a href="/latest/" class="latestButton">LATEST INFORMATION</a>
+        <br><br>
+        Today, EnviroLogic is the leading global manufacturer of industrial, commercial, marine, institutional and residential products for use in the innovative field of Environmental Biotechnology. We have extensively researched the natural process and technology of bioremediation over the last decade and manufacture the extensive synergistic system of SpillAway BrandTM products to assist our clients and customers achieve mandatory regulatory compliance.
+        <br><br>
+        Our corporate resolve is to continuing excellence in the production of cost effective and application friendly products. EnviroLogic has accomplished the development of unique, natural, novel and exceptionally efficient bioremedial products.
+        <br><br>
+        Our corporate mission in this new millennium is the continuing research and advancement of New Dimensions in Environmental Biotechnology.<sup>TM</sup> Our focus is on waste minimization of hydrocarbon and organic food waste, bioaugmentation, soil and water restoration, biological maintenance solutions, odor control and pollution prevention initiatives.
+        <br><br>
+        EnviroLogic is committed to assisting government, military, industry, and consumers, in the international marketplace achieve social and economic benefits through Life Science and Environmental Biotechnology.<sup>TM</sup>
+    </div>
+  
+      <!-- End Simple Plain -->
+    </section>
+    <!-- End Icon Blocks -->
+
+    <div class="u-ns-bg-v1-bottom g-bg-white"></div>
+
+    <?php include 'includes/footer.php';?>
+
+    <a class="js-go-to u-go-to-v1" href="#!" data-type="fixed" data-position='{
+     "bottom": 15,
+     "right": 15
+   }' data-offset-top="400" data-compensation="#js-header" data-show-effect="zoomIn">
+      <i class="hs-icon hs-icon-arrow-top"></i>
+    </a>
+  </main>
+
+  <div class="u-outer-spaces-helper"></div>
+
+
+  <!-- JS Global Compulsory -->
+  <?php include 'includes/js.php';?>
+  <script  src="vendor/hs-bg-video/hs-bg-video.js"></script>
+  <script  src="vendor/hs-bg-video/vendor/player.min.js"></script>
+  <script  src="js/helpers/hs.bg-video.js"></script>
+  <?php include 'includes/js-plugin.php';?>
+
+<!-- JS Implementing Plugins -->
+
+</body>
+
+</html>
