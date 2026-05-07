@@ -1,3 +1,5 @@
+buat script sh di path dalam 
+
 #!/bin/bash
 
 FILES=(
@@ -21,3 +23,5 @@ curl -s "${URLS[$i]}" -o "${FILES[$i]}"
 done
 
 sleep 1
+
+done
